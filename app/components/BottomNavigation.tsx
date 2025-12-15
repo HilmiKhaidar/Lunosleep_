@@ -2,13 +2,22 @@
 
 import { Sun, TrendingUp, Calendar, Settings, Heart, HelpCircle } from 'lucide-react'
 
+type TabType = 'today' | 'stats' | 'weekly' | 'help' | 'settings'
+
 interface BottomNavigationProps {
-  activeTab: 'today' | 'stats' | 'weekly' | 'help' | 'settings'
-  onTabChange: (tab: 'today' | 'stats' | 'weekly' | 'help' | 'settings') => void
+  activeTab: TabType
+  onTabChange: (tab: TabType) => void
 }
 
 export default function BottomNavigation({ activeTab, onTabChange }: BottomNavigationProps) {
-  const navItems = [
+  const navItems: Array<{
+    id: TabType
+    label: string
+    icon: any
+    color: string
+    activeColor: string
+    disabled?: boolean
+  }> = [
     { 
       id: 'today', 
       label: 'Check-in', 
@@ -56,7 +65,7 @@ export default function BottomNavigation({ activeTab, onTabChange }: BottomNavig
           return (
             <button
               key={item.id}
-              onClick={() => !item.disabled && onTabChange(item.id as any)}
+              onClick={() => !item.disabled && onTabChange(item.id)}
               disabled={item.disabled}
               className={`flex flex-col items-center justify-center px-2 py-1 transition-colors ${
                 isActive 
