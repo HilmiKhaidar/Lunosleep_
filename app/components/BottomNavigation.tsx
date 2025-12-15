@@ -10,44 +10,37 @@ interface BottomNavigationProps {
 }
 
 export default function BottomNavigation({ activeTab, onTabChange }: BottomNavigationProps) {
-  const navItems: Array<{
-    id: TabType
-    label: string
-    icon: any
-    color: string
-    activeColor: string
-    disabled?: boolean
-  }> = [
+  const navItems = [
     { 
-      id: 'today', 
+      id: 'today' as const, 
       label: 'Check-in', 
       icon: Heart, 
       color: 'text-mint-600',
       activeColor: 'text-mint-600 bg-mint-50'
     },
     { 
-      id: 'stats', 
+      id: 'stats' as const, 
       label: 'Dashboard', 
       icon: TrendingUp, 
       color: 'text-gray-500',
       activeColor: 'text-mint-600 bg-mint-50'
     },
     { 
-      id: 'weekly', 
+      id: 'weekly' as const, 
       label: 'Wawasan', 
       icon: Calendar, 
       color: 'text-gray-500',
       activeColor: 'text-mint-600 bg-mint-50'
     },
     { 
-      id: 'help', 
+      id: 'help' as const, 
       label: 'Bantuan', 
       icon: HelpCircle, 
       color: 'text-gray-500',
       activeColor: 'text-mint-600 bg-mint-50'
     },
     { 
-      id: 'settings', 
+      id: 'settings' as const, 
       label: 'Pengaturan', 
       icon: Settings, 
       color: 'text-gray-500',
@@ -65,14 +58,11 @@ export default function BottomNavigation({ activeTab, onTabChange }: BottomNavig
           return (
             <button
               key={item.id}
-              onClick={() => !item.disabled && onTabChange(item.id)}
-              disabled={item.disabled}
+              onClick={() => onTabChange(item.id)}
               className={`flex flex-col items-center justify-center px-2 py-1 transition-colors ${
                 isActive 
                   ? item.activeColor
-                  : item.disabled 
-                    ? 'text-gray-300 cursor-not-allowed'
-                    : `${item.color} hover:text-mint-500 hover:bg-mint-50/50`
+                  : `${item.color} hover:text-mint-500 hover:bg-mint-50/50`
               }`}
             >
               <Icon className="w-5 h-5 mb-1" />
